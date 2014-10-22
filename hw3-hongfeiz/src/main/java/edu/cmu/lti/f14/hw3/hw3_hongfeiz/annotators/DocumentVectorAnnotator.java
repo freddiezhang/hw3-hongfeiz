@@ -18,6 +18,9 @@ import edu.cmu.lti.f14.hw3.hw3_hongfeiz.utils.Utils;
 public class DocumentVectorAnnotator extends JCasAnnotator_ImplBase {
 
 	@Override
+	/**
+	 * Call createTermFreqVector method to put Token into Document.
+	 */
 	public void process(JCas jcas) throws AnalysisEngineProcessException {
 
 		FSIterator<Annotation> iter = jcas.getAnnotationIndex().iterator();
@@ -48,8 +51,8 @@ public class DocumentVectorAnnotator extends JCasAnnotator_ImplBase {
 	 * 
 	 * @param jcas
 	 * @param doc
+	 * Call Utils.fromCollectionToFSList() to generate FSList.
 	 */
-
 	private void createTermFreqVector(JCas jcas, Document doc) {
 
 		String docText = doc.getText();

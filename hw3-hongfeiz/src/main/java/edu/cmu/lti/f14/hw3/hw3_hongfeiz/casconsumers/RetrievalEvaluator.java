@@ -60,7 +60,6 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
     try {
       outStream = new FileOutputStream(outFile,true);
     } catch (FileNotFoundException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
 		qIdList = new ArrayList<Integer>();
@@ -73,7 +72,7 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 	}
 
 	/**
-	 * TODO :: 1. construct the global word dictionary 2. keep the word
+	 * 1. construct the global word dictionary 2. keep the word
 	 * frequency for each sentence
 	 */
 	public void processCas(CAS aCas) throws ResourceProcessException {
@@ -107,37 +106,11 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 	}
 
 	/**
-	 * TODO 1. Compute Cosine Similarity and rank the retrieved sentences 2.
+	 * 1. Compute Cosine Similarity and rank the retrieved sentences 2.
 	 * Compute the MRR metric
 	 */
 	
-  public class SortList implements Comparable<SortList> {
-     int Id;
-     int rel;
-     int sId;
-     double Similarity;
-     SortList(int sId, int Id, int rel, double Similarity) {
-     this.sId = sId;
-     this.Id = Id;
-     this.rel = rel;
-     this.Similarity = Similarity;
-     }
-     public double getSim() {
-       return Similarity;
-     }
-     public int getSId() {
-       return sId;
-     }
-     @Override
-     public int compareTo(SortList o) {
-       if (this.Similarity - o.Similarity < 0)
-         return 1;
-       else if (this.Similarity - o.Similarity > 0)
-         return -1;
-       else
-         return this.rel == 1 ? 0 : 1;
-     }
-  }
+ 
   ArrayList<Integer> ranks = new ArrayList<Integer>();
 	@Override
 	public void collectionProcessComplete(ProcessTrace arg0)
@@ -189,10 +162,6 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
   		ranks.add(rank);
 		}
 		
-		// TODO :: compute the rank of retrieved sentences
-		
-
-		// TODO :: compute the metric:: mean reciprocal rank
 		double metric_mrr = compute_mrr();
 		//System.out.println(" (MRR) Mean Reciprocal Rank ::" + String.format("%.4f", metric_mrr));
 		String outSentence = " (MRR) Mean Reciprocal Rank ::" + String.format("%.4f", metric_mrr) + "\n";
@@ -242,7 +211,6 @@ public class RetrievalEvaluator extends CasConsumer_ImplBase {
 		}
 		metric_mrr /= (double) q;
 		return metric_mrr;
-		// TODO :: compute Mean Reciprocal Rank (MRR) of the text collection
 		
 	}
 	@Override
